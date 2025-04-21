@@ -1,19 +1,61 @@
 
 
 <div class="registration-form">
+    <form  [formGroup]="userDetails">
+        <div class="column">
+            
+                <mat-form-field  appearance="outline"   floatLabel="auto"  class="Firstname">
+                    <mat-label>Firstname</mat-label>
+                    <input matInput>
+                  </mat-form-field>
+            
+            
+                  <mat-form-field appearance="outline" floatLabel="auto" class="Lastname">
+                    <mat-label>Lastname</mat-label>
+                    <input matInput>
+                  </mat-form-field>
+           
+        </div>
 
-    <div class="username">
-        <mat-form-field  appearance="outline"   floatLabel="auto"  class="Firstname">
-            <mat-label>Firstname</mat-label>
-            <input matInput>
-          </mat-form-field>
+        <div class="column">
+            <mat-form-field  appearance="outline"   floatLabel="auto"  class="Email">
+                <mat-label>Email</mat-label>
+                <input matInput>
+              </mat-form-field>
+
+              <mat-form-field  appearance="outline"   floatLabel="auto"  class="Phone">
+                <mat-label>Phone Number</mat-label>
+                <input matInput>
+              </mat-form-field>
+         </div>
+
+         <div class="column">
+            <mat-form-field  appearance="outline"   floatLabel="auto"  class="Height">
+                <mat-label>Height</mat-label>
+                <input matInput>
+              </mat-form-field>
+
+              <mat-form-field  appearance="outline"   floatLabel="auto"  class="Weight">
+                <mat-label>Weight</mat-label>
+                <input matInput>
+              </mat-form-field>
+         </div>
+
+         <div class="column">
+            <mat-form-field  appearance="outline"   floatLabel="auto"  class="BMI">
+                <mat-label>BMI</mat-label>
+                <input matInput>
+              </mat-form-field>
+
+              <mat-form-field  [ariaReadOnly]="" appearance="outline"   floatLabel="auto"  class="BMIresult">
+                <mat-label>BMI REsult</mat-label>
+                <input matInput>
+              </mat-form-field>
+         </div>
+
+
+    </form>
     
-    
-          <mat-form-field appearance="outline" class="Lastname">
-            <mat-label>Lastname</mat-label>
-            <input matInput>
-          </mat-form-field>
-    </div>
   
    
 

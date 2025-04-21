@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-create-update-user',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./create-update-user.component.css']
 })
 export class CreateUpdateUserComponent {
-
+  userDetails!:FormGroup
 }

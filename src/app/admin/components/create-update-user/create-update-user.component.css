@@ -12,7 +12,7 @@
   }
 
 
-  .username {
+  .column {
     display: flex;
     gap: 20px;               /* space between first and last name fields */
   }

@@ -12,6 +12,6 @@ export class User {
   package!: string;
   important!: string[];
   haveGymBefore!: string;
-  enquiryDate!: string;
+  admissinDate!: string;
   id!: number;
 }
