@@ -1,0 +1,30 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { AdminRoutingModule } from './admin-routing.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
+import { TrainerDetailComponent } from './components/trainer-detail/trainer-detail.component';
+import { SharedModule } from '../shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { CreateUpdateUserComponent } from 'src/app/admin/components/create-update-user/create-update-user.component';
+
+
+@NgModule({
+  declarations: [
+    DashboardComponent,
+    UserManagementComponent,
+    TrainerDetailComponent,
+    CreateUpdateUserComponent,
+  ],
+
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    SharedModule,
+    RouterModule,
+    
+  ],
+  
+})
+export class AdminModule { }

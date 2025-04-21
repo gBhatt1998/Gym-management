@@ -1,0 +1,59 @@
+/* header.component.css */
+.header {
+    background-color: #333; /* Dark background */
+    color: #fff;  /* White text */
+    padding: 10px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff6347; /* GymFit accent color */
+  }
+  
+  .links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .link {
+    margin: 0 15px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
+  .active {
+    font-weight: bold;
+    color: #ff6347; /* Highlight active link with the same color */
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .nav {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .links {
+      display: block;
+      margin-top: 10px;
+    }
+  
+    .link {
+      margin: 5px 0;
+    }
+  }
+  
