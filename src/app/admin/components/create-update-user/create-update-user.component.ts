@@ -8,4 +8,19 @@ import { FormGroup } from '@angular/forms';
 })
 export class CreateUpdateUserComponent {
   userDetails!:FormGroup
+
+  selectedGender!: string;
+  genders: string[] = ["Male", "Female"];
+  packages: string[] = ["Monthly", "Quarterly", "Yearly"];
+  importantList: string[] = [
+    "Toxic Fat reduction",
+    "Energy and Endurance",
+    "Building Lean Muscle",
+    "Healthier Digestive System",
+    "Sugar Craving Body",
+    "Fitness"
+  ]
+
+ 
+
 }
