@@ -9,7 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { CreateUpdateUserComponent } from 'src/app/admin/components/create-update-user/create-update-user.component';
 
-
+import {MatNativeDateModule} from '@angular/material/core';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -23,7 +23,7 @@ import { CreateUpdateUserComponent } from 'src/app/admin/components/create-updat
     AdminRoutingModule,
     SharedModule,
     RouterModule,
-    
+    MatNativeDateModule
   ],
   
 })
