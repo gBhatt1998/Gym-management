@@ -11,8 +11,12 @@ export class CreateUpateUserService {
   
   constructor(private http: HttpClient) { }
 
-  postRegistration(registerObj: User) {
-    return this.http.post<User>(`${this.userUrl}`, registerObj)
+  postRegistration(userDetailsObj: User) {
+    return this.http.post<User>(`${this.userUrl}`, userDetailsObj)
+  }
+
+  getRegisteredUser() {
+    return this.http.get<User[]>(`${this.userUrl}`)
   }
 
 }

@@ -8,14 +8,18 @@ import { TrainerDetailComponent } from './components/trainer-detail/trainer-deta
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { CreateUpdateUserComponent } from 'src/app/admin/components/create-update-user/create-update-user.component';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatSortModule} from '@angular/material/sort';
+import { GenericTableComponent } from './components/generic-table/generic-table.component';
 @NgModule({
   declarations: [
     DashboardComponent,
     UserManagementComponent,
     TrainerDetailComponent,
     CreateUpdateUserComponent,
+    GenericTableComponent,
   ],
 
   imports: [
@@ -23,7 +27,10 @@ import {MatNativeDateModule} from '@angular/material/core';
     AdminRoutingModule,
     SharedModule,
     RouterModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   
 })

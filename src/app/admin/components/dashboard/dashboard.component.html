@@ -1,2 +1,15 @@
-<app-navbar></app-navbar>
-<p>dashboard works!</p>
+<div class="btn-group" >
+    <button (click)="toggleView('user')">Show User Details</button>
+    <button (click)="toggleView('trainer')">Show Trainer Detail</button>
+    <button routerLink="manageuser">Add user</button>
+  </div>
+  
+  <div class="mat-table" >
+    <app-user-management *ngIf="showUser"></app-user-management>
+
+
+  <app-trainer-detail *ngIf="!showUser"></app-trainer-detail>
+  </div>
+  
+  
+  
