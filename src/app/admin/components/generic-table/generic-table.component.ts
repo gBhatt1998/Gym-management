@@ -36,10 +36,10 @@ export class GenericTableComponent <T> {
     }
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  // ngAfterViewInit() {
+  //   this.dataSource.paginator = this.paginator;
+  //   this.dataSource.sort = this.sort;
+  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -49,8 +49,8 @@ export class GenericTableComponent <T> {
       this.dataSource.paginator.firstPage();
     }
   }
-  handleClick(row: T, actionType: string) {
-    console.log('Action:', actionType, 'on', row);
-  }
+  // handleClick(row: T, actionType: string) {
+  //   console.log('Action:', actionType, 'on', row);
+  // }
   
 }

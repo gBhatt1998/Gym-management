@@ -1,4 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 
+
+.mat-primary {
+    color: #e53935;
+    /* background-color: #ffc107;  */
+  }
+  
+  .mat-accent {
+    color: #ffc107; 
+  }
+  
+  .mat-warn {
+    color: #69f0ae; 
+  }
+  
+
+  .mat-button.mat-primary {
+    background-color: #e53935;
+    color: white;
+  }
+  
+  .mat-button.mat-accent {
+    background-color: #ffc107;
+    color: black;
+  }
+  
+  .mat-button.mat-warn {
+    background-color: #69f0ae;
+    color: black;
+  }
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
