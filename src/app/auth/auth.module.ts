@@ -13,8 +13,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    // SharedModule
+    SharedModule
   ],
-  // export:[AuthModule]
+  exports:[AuthRoutingModule]
 })
 export class AuthModule { }

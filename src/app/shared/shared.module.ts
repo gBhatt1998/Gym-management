@@ -12,7 +12,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AuthRoutingModule } from '../auth/auth-routing.module';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [
     NavbarComponent
@@ -32,6 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     MatDatepickerModule,
     HttpClientModule,
+    AuthRoutingModule,
+    MatCardModule
     
   ],
   exports:[
@@ -46,7 +49,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatRadioModule,
     MatSelectModule,
     MatDatepickerModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule
   ]
 })
 export class SharedModule { }

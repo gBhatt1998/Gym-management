@@ -1,1 +1,32 @@
-<p>login works!</p>
+<mat-card class="login-card">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h2>Admin Login</h2>
+  
+      <mat-form-field appearance="outline" class="width">
+        <mat-label>AdminName</mat-label>
+        <input matInput formControlName="adminName" type="text" required />
+        <mat-error *ngIf="loginForm.get('adminName')?.hasError('required')">
+            adminName is required
+        </mat-error>
+        
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="width">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" required />
+        
+      </mat-form-field>
+  
+
+<button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" [routerLink]="['/login']">
+    Login
+  </button>
+  
+
+  <button mat-stroked-button color="warn" [routerLink]="['/login']" [queryParams]="{ logout: true }">
+    Logout
+  </button>
+  
+    </form>
+  </mat-card>
+  
