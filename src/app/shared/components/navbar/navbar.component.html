@@ -1,29 +1,19 @@
-<header class="header">
-    <nav class="nav">
-        <div class="title">
-            GymFit
-        </div>
-        <ul class="links">
-            <li class="link" routerLink="/" routerLinkActive="active" >
-                Home
-            </li>
-            <li class="link" routerLink="/memberships" routerLinkActive="active">
-                Membership
-            </li>
-            <li class="link" routerLink="/trainers" routerLinkActive="active">
-                Trainers
-            </li>
-            <li class="link" routerLink="/workouts" routerLinkActive="active">
-                Workouts
-            </li>
-            <li class="link" routerLink="/about" routerLinkActive="active">
-                About Us
-            </li>
-            <li class="link" (click)="logout()">
-                Log Out
-            </li>
-        </ul>
-    </nav>
-</header>
+<mat-toolbar color="primary">
+   
+    <span class="mat-title">
+        {{ title }}
+    </span>
 
+    <span class="example-spacer"></span>
 
+    <!-- after authentication -->
+    <ng-container *ngIf="authService.isAuthenticated(); else showLogin">
+        <span class="text-white me-3">Welcome, {{ adminName }}</span>
+        <button mat-raised-button color="accent" (click)="logout()">Logout</button>
+    </ng-container>
+    
+<!-- before authentication -->
+    <ng-template #showLogin>
+        <button mat-raised-button color="accent" routerLink="/auth/login">Admin Login</button>
+    </ng-template>
+</mat-toolbar>

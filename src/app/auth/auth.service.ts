@@ -49,6 +49,6 @@ export class AuthService {
 
   //method to be used by authgurad
   isAuthenticated(){
-    return !!localStorage.getItem('admin');
+    return !!localStorage.getItem('admin'); 
   }
 }

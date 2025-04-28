@@ -1,21 +1,38 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  isLoggedIn = true; // This would be based on your actual authentication logic
+  
+  isLoggedIn: boolean = false;
+  adminName: string = '';
+  title: string = 'Gym Fit';
 
-  constructor(private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.update();
+  }
+
+  update() {
+    this.isLoggedIn = this.authService.isAuthenticated();
+    if (this.isLoggedIn) {
+      const admin = JSON.parse(localStorage.getItem('admin') || '{}');
+      this.adminName = admin?.name || '';
+      this.title = 'Admin Panel';
+    } else {
+      this.adminName = '';
+      this.title = 'Gym Fit';
+    }
+  }
 
   logout() {
-    // Perform logout logic (clear authentication token, user data, etc.)
-    console.log('Logged out');
-    this.isLoggedIn = false; // Update login state
-    
-    // Redirect user to login page after logging out
-    this.router.navigate(['/login']);
+    this.authService.logout();
+    this.update();
+    this.router.navigate(['/auth/login']); 
   }
 }

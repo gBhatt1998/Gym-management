@@ -1,15 +1,16 @@
-<div class="btn-group" >
-    <button  type="button"  (click)="toggleView('user')">Show User Details</button>
-    <button  type="button" (click)="toggleView('trainer')">Show Trainer Detail</button>
-    <button  type="button" routerLink="manageuser">Add user</button>
+<app-navbar></app-navbar>
+<div class="card shadow-sm">
+  <div class="card-header d-flex justify-content-start">
+    <div class="btn-group" role="group" aria-label="View Toggle Buttons">
+      <button type="button" class="btn btn-primary" (click)="toggleView('user')">Show User Details</button>
+      <button type="button" class="btn btn-secondary" (click)="toggleView('trainer')">Show Trainer Details</button>
+      <button type="button" class="btn btn-success" routerLink="manageuser">Add User</button>
+    </div>
   </div>
-  
-  <div class="mat-table" >
+
+  <div class="card-body bg-light">
     <app-user-management *ngIf="showUser"></app-user-management>
-
-
-  <app-trainer-detail *ngIf="!showUser"></app-trainer-detail>
+    <app-trainer-detail *ngIf="!showUser"></app-trainer-detail>
   </div>
-  
-  
-  
+</div>
+

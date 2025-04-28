@@ -26,7 +26,7 @@ export class LoginComponent {
     });
   }
   ngOnInit(): void {
-    // Check for logout=true in URL
+    
     this.route.queryParams.subscribe(params => {
       if (params['logout'] === 'true') {
         this.authService.logout();
