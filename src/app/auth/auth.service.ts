@@ -1,54 +1,84 @@
 import { Injectable } from '@angular/core';
-
+import { environment } from '../admin/components/models/environment';
+import { AdminTrainerResponse } from '../admin/components/models/trainerdetail';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-   data = [
-    {
-      id: '1',
-      name: 'admin 1',
-      adminName: 'ad',
-      password: 'admin1'
-    },
-    {
-      id: '2',
-      name: 'admin 2',
-      adminName: 'admin2',
-      password: 'admin2password'
-    },
-    {
-      id: '3',
-      name: 'admin 3',
-      adminName: 'admin3',
-      password: 'admin3pass'
+
+  private adminTrainerURl=environment.adminTrainer;
+  
+
+  private currentUserSubject = new BehaviorSubject<AdminTrainerResponse | null>(null);
+  private adminName: string = '';
+
+  constructor(private http: HttpClient, private router: Router) {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      const user = JSON.parse(storedUser) as AdminTrainerResponse;
+      this.currentUserSubject.next(user);
+      this.adminName = user.name;
     }
-  ];
-  isLogged:Boolean=false;
-  constructor() {
-    
-
-   }
-
-   login(adminName:String,password:String){
-    let admin=this.data.find((u)=>u.adminName===adminName && u.password===password );
-    console.log("auth service working")
-    if(admin===undefined)
-      this.isLogged=false;
-    else
-    console.log("refresh")
-    localStorage.setItem('admin', JSON.stringify(admin));
-    this.isLogged=true;
-  return admin;
   }
 
-  logout(){
-    localStorage.removeItem('admin');
-    this.isLogged=false;
+  isLogged: boolean = false;
+
+
+ 
+
+  login(username: string, password: string): Observable<AdminTrainerResponse | null> {
+    return this.http.get<AdminTrainerResponse[]>(
+      `${this.adminTrainerURl}?username=${username}&password=${password}`
+    ).pipe(
+      map(users => {
+        console.log(users)
+        if (users.length > 0) {
+
+          const user = users[0];
+          console.log("1 user",user)
+
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+          this.adminName = user.name;
+          return user;
+        }
+        return null;
+      }),
+      catchError(e => {
+        console.log('login error:', e);
+        return of(null);
+      })
+    );
   }
 
-  //method to be used by authgurad
-  isAuthenticated(){
-    return !!localStorage.getItem('admin'); 
+
+  logout(): void {
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+    this.adminName = '';
+    this.router.navigate(['/login']);
+  }
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('currentUser');
+  }
+
+  getAdminName(): string {
+    return this.adminName;
+  }
+
+  isAdmin(): boolean {
+    return this.currentUserSubject.value?.role.includes('admin') ?? false;
+  }
+
+  isTrainer(): boolean {
+    return this.currentUserSubject.value?.role.includes('trainer') ?? false;
+  }
+
+  getCurrentUser(): AdminTrainerResponse | null {
+    return this.currentUserSubject.value;
   }
 }

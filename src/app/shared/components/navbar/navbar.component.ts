@@ -21,8 +21,8 @@ export class NavbarComponent {
   update() {
     this.isLoggedIn = this.authService.isAuthenticated();
     if (this.isLoggedIn) {
-      const admin = JSON.parse(localStorage.getItem('admin') || '{}');
-      this.adminName = admin?.name || '';
+      
+      this.adminName = this.authService.getAdminName();
       this.title = 'Admin Panel';
     } else {
       this.adminName = '';

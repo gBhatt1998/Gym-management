@@ -18,7 +18,19 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['login']);
       return false;
     }
+
+
+    const Role = next.data['Role'];
+    if (Role) {
+      const hasRole = Role === 'admin' ? this.authService.isAdmin():this.authService.isTrainer();
+      
+      
+    }
     console.log("auth guard working")
     return true;
   }
+
+  
 }
+
+

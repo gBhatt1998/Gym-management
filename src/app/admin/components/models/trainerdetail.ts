@@ -6,3 +6,11 @@ export interface trainerDetail{
     age:number;
     experince:number;
 }
+
+export interface AdminTrainerResponse {
+    id: string;
+    name: string;
+    username: string;
+    role: string;
+    password: string;
+  }

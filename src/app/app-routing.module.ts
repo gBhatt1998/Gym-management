@@ -7,7 +7,11 @@ const routes: Routes = [
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate:[AuthGuard] },
   {
     path: 'auth',loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
-  }
+  },
+  { path: 'trainer', loadChildren: () => import('./trainer/trainer.module').then(m => m.TrainerModule),canActivate:[AuthGuard],data: { 
+    Role: 'trainer' 
+  } }
+ 
 ];
 
 @NgModule({

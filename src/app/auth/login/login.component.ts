@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service'; 
-import { ActivatedRoute } from '@angular/router';
-
-import { Router } from '@angular/router';
-import { Admin } from '../admin.interface'; 
+import { AuthService } from '../auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,39 +9,59 @@ import { Admin } from '../admin.interface';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
   loginForm: FormGroup;
+   loading = false;
+  errorMessage: string | null = null;
+  returnUrl: string = '/admin'; 
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     this.loginForm = this.fb.group({
-      adminName: ['', [Validators.required]],
+      username: ['', [Validators.required]], 
       password: ['', Validators.required],
     });
-  }
-  ngOnInit(): void {
-    
+
+ 
     this.route.queryParams.subscribe(params => {
+      this.returnUrl = params['returnUrl'] || '/admin';
+      
       if (params['logout'] === 'true') {
         this.authService.logout();
-       
       }
     });
-  }
+  } 
+
   onSubmit() {
     if (this.loginForm.valid) {
-      const { adminName, password } = this.loginForm.value;
-
-      const user = this.authService.login(adminName, password);  
-      if (user) {
+      this.loading = true;
+      this.errorMessage = null;
       
-        this.router.navigate(['/admin']);
-      } else {
-        alert('Invalid login credentials!');
-      }
+      const { username, password } = this.loginForm.value;
+
+      this.authService.login(username, password).subscribe({
+        next: (user) => {
+          if (user) {
+            console.log("login",user)
+            let redirectUrl = this.returnUrl;
+            
+            if (!this.returnUrl || this.returnUrl === '/admin') {
+              redirectUrl = this.authService.isAdmin() ? '/admin' : '/trainer';
+            }
+
+            this.router.navigateByUrl(redirectUrl);
+          } 
+          
+        },
+        error: (err) => {
+          
+          console.error('login error:', err);
+        }
+      });
     }
   }
 }
