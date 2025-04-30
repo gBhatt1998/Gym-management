@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./static-page.component.css']
 })
 export class StaticPageComponent {
-
+  contact:string='gymfit@gmail.com'
 }

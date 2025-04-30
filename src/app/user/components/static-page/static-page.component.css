@@ -1,0 +1,47 @@
+.gym-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f6f8;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .gym-content {
+    margin: auto 0;
+  }
+  
+  .gym-content h1 {
+    font-size: 4rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .gym-content h1 span {
+    color: #e74c3c;
+  }
+  
+  .tagline {
+    font-size: 1.4rem;
+    color: #555;
+    font-style: italic;
+    margin-top: 10px;
+  }
+  
+  .gym-footer {
+    font-size: 1rem;
+    color: #333;
+    padding-bottom: 10px;
+  }
+  
+  .gym-footer p {
+    margin: 4px 0;
+  }
+  
+  .gym-footer strong {
+    color: #2c3e50;
+  }
+  
