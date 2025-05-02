@@ -1,0 +1,56 @@
+.table-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+    overflow: hidden;
+  }
+  
+  .filter-container {
+    padding: 16px;
+    background: white;
+   
+    
+    position: sticky;
+    top: 0;
+  }
+  
+  .global-filter {
+    width: 100%;
+  }
+  
+  .table-wrapper {
+    overflow: auto;
+    padding: 0 16px;
+  }
+  
+
+  .column-header {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .column-filter {
+    width: 80%;
+    min-width: 100px;
+  }
+  
+  
+  .column-filter input {
+    font-size: 12px;
+  }
+  
+  .mat-table {
+    width: 50%;
+  }
+  
+  .mat-header-cell {
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .mat-cell {
+    padding: 8px;
+  }
+  
+ 

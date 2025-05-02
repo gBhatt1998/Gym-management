@@ -1,0 +1,50 @@
+<div class="container">
+    <h2>Manage Trainer Schedules</h2>
+    <div *ngIf="!isAdmin()">Access denied: Admin only</div>
+    <div *ngIf="isAdmin()">
+        <!-- Form to propose schedule -->
+        <form (ngSubmit)="onSubmit()">
+            <div>
+                <label>Trainer</label>
+                <select [(ngModel)]="newSchedule.trainerId" name="trainerId" required>
+                    <option value="" disabled>Select a trainer</option>
+                    <option *ngFor="let trainer of trainers" [value]="trainer.id">
+                        {{ trainer.name }}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <label>Proposed Days</label>
+                <div *ngFor="let day of daysOfWeek">
+                    <input type="checkbox" [value]="day" (change)="onDayChange($event, day)" />
+                    {{ day }}
+                </div>
+            </div>
+            <button type="submit" [disabled]="!newSchedule.trainerId || !newSchedule.proposedDays.length">Propose
+                Schedule</button>
+        </form>
+
+        <!-- Display schedules -->
+        <h3>Trainer Responses</h3>
+        <div *ngIf="loading$ | async">Loading...</div>
+        <div *ngIf="error$ | async as error">{{ error.message }}</div>
+        <table *ngIf="(schedules$ | async)?.length">
+            <thead>
+                <tr>
+                    <th>Trainer</th>
+                    <th>Proposed Days</th>
+                    <th>Selected Days</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let schedule of schedules$ | async">
+                    <td>{{ getTrainerName(schedule.trainerId) }}</td>
+                    <td>{{ schedule.proposedDays.join(', ') }}</td>
+                    <td>{{ schedule.selectedDays.join(', ') }}</td>
+                    <td>{{ schedule.status }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
