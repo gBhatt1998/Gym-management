@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+   
+    <span class="mat-title">
+        {{ title }}
+    </span>
+
+    <span class="example-spacer"></span>
+
+    <!-- after authentication -->
+    <ng-container *ngIf="authService.isAuthenticated(); else showLogin">
+        <span class="text-white me-3">Welcome, {{ adminName }}</span>
+        <button mat-raised-button color="accent" (click)="logout()">Logout</button>
+    </ng-container>
+    
+<!-- before authentication -->
+    <ng-template #showLogin>
+        <button mat-raised-button color="accent" routerLink="/auth/login">Admin & Trainer Login</button>
+    </ng-template>
+</mat-toolbar>

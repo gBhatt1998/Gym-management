@@ -1,0 +1,39 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2, h3 {
+  text-align: center;
+  color: #333;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.days-section {
+  margin-bottom: 20px;
+}
+
+mat-checkbox {
+  display: block;
+  margin: 5px 0;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+mat-table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+mat-header-cell, mat-cell {
+  padding: 10px;
+  text-align: center;
+}

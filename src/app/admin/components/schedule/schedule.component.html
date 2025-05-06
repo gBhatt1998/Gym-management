@@ -1,0 +1,67 @@
+<div class="container">
+    <h2>Manage Trainer Schedules</h2>
+    <div *ngIf="!isAdmin()" class="error" style="color: red; text-align: center;">
+        Access denied: Admin only
+    </div>
+    <div *ngIf="isAdmin()">
+        <form (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Trainer</mat-label>
+                <mat-select [(ngModel)]="newSchedule.trainerId" name="trainerId" required>
+                    <mat-option [value]="0" disabled>Select a trainer</mat-option>
+                    <mat-option *ngFor="let trainer of trainers" [value]="trainer.id">
+                        {{ trainer.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="days-section">
+                <label style="font-weight: bold; display: block; margin-bottom: 10px;">Proposed Days</label>
+                <div *ngFor="let day of daysOfWeek">
+
+                    <mat-checkbox [value]="day" (change)="onDayChange($event, day)">
+                  {{ day }}
+                    </mat-checkbox>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button mat-raised-button color="primary" type="submit"
+                    [disabled]="!newSchedule.trainerId || !newSchedule.proposedDays.length">
+                    Propose Schedule
+                </button>
+            </div>
+        </form>
+
+        <h3>Trainer Responses</h3>
+        <div *ngIf="loading$ | async" class="loading">
+            <mat-spinner diameter="40" style="margin: 20px auto;"></mat-spinner>
+        </div>
+        <div *ngIf="error$ | async as error" class="error" style="color: red; text-align: center;">
+            {{ error.message }}
+        </div>
+        <mat-table [dataSource]="(schedules$ | async) ?? []" *ngIf="(schedules$ | async)?.length">
+            <ng-container matColumnDef="trainer">
+                <mat-header-cell *matHeaderCellDef>Trainer</mat-header-cell>
+                <mat-cell *matCellDef="let schedule">{{ getTrainerName(schedule.trainerId) }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="proposedDays">
+                <mat-header-cell *matHeaderCellDef>Proposed Days</mat-header-cell>
+                <mat-cell *matCellDef="let schedule">{{ schedule.proposedDays.join(', ') }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="selectedDays">
+                <mat-header-cell *matHeaderCellDef>Selected Days</mat-header-cell>
+                <mat-cell *matCellDef="let schedule">{{ schedule.selectedDays.length ? schedule.selectedDays.join(', ')
+                    : 'none' }}</mat-cell>
+            </ng-container>
+
+      <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+                <mat-cell *matCellDef="let schedule">{{ schedule.status }}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+</div>

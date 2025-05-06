@@ -1,0 +1,50 @@
+<div class="container">
+    <h2>My Schedules</h2>
+    <div *ngIf="!isTrainer()" class="error" style="color: red; text-align: center;">
+        Access denied: Trainer only
+    </div>
+    <div *ngIf="isTrainer()">
+        <div *ngIf="loading$ | async" class="loading">
+        </div>
+        <div *ngIf="error$ | async as error" class="error" style="color: red; text-align: center;">
+            {{ error.message == 'Trainer not authorized for this schedule' ? 'You are not authorized to update this
+            schedule.' : error.message }}
+        </div>
+        <div *ngIf="(schedules$ | async)?.length == 0 && !(loading$ | async)" class="info"
+            style="text-align: center; color: #555;">
+            No schedules assigned to you.
+        </div>
+        <div *ngFor="let schedule of schedules$ | async; let last = last">
+            <mat-card class="schedule-card">
+                <mat-card-header>
+                    <mat-card-title>Schedule ID: {{ schedule.id || 'N/A' }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p><strong>Proposed Days:</strong> {{ schedule.proposedDays.join(', ') }}</p>
+                    <p><strong>Status:</strong> {{ schedule.status }}</p>
+                    <div *ngIf="schedule.status == 'proposed' && schedule.id">
+                        <label style="font-weight: bold; display: block; margin-bottom: 10px;">Select Days</label>
+                        <div *ngFor="let day of schedule.proposedDays">
+                            <mat-checkbox [value]="day" (change)="onDayChange($event, day, schedule.id)">
+                                {{ day }}
+                            </mat-checkbox>
+                        </div>
+                        <p><strong>Selected Days:</strong> {{ (selectedDays[schedule.id] &&
+                            selectedDays[schedule.id].length) ? selectedDays[schedule.id].join(', ') : 'None' }}</p>
+                        <mat-card-actions>
+                            <button mat-raised-button color="primary" (click)="submitResponse(schedule.id)"
+                                [disabled]="!(selectedDays[schedule.id] && selectedDays[schedule.id].length)">
+                                Submit Response
+                            </button>
+                        </mat-card-actions>
+                        <div *ngIf="successMessage && !(selectedDays[schedule.id] && selectedDays[schedule.id].length)"
+                            class="success" style="color: green; margin-top: 10px;">
+                            {{ successMessage }}
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <mat-divider *ngIf="!last" style="margin: 20px 0;"></mat-divider>
+        </div>
+    </div>
+</div>

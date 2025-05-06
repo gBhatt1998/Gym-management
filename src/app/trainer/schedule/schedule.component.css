@@ -1,0 +1,19 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+.schedule-card {
+  margin-bottom: 20px;
+}
+
+mat-checkbox {
+  display: block;
+  margin: 5px 0;
+}

@@ -1,0 +1,45 @@
+<div class="table-container">
+  <div class="filter-container">
+    <mat-form-field appearance="outline" class="global-filter">
+      <mat-label>Global Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+    </mat-form-field>
+
+  <div class="custom-select-filters" *ngIf="showGenderFilter || showPackageFilter">
+    <mat-form-field appearance="fill" *ngIf="showGenderFilter" class="custom-select">
+      <mat-label>Gender</mat-label>
+      <mat-select multiple [(value)]="selectedGenders" (selectionChange)="updateFilter()">
+        <mat-option *ngFor="let gender of uniqueGenders" [value]="gender">{{ gender }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" *ngIf="showPackageFilter" class="custom-select">
+      <mat-label>Package</mat-label>
+      <mat-select multiple [(value)]="selectedPackages" (selectionChange)="updateFilter()">
+        <mat-option *ngFor="let pkg of uniquePackages" [value]="pkg">{{ pkg }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      <ng-container *ngFor="let column of objectKeys(columnHeader)" [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ columnHeader[column] }}
+        </th>
+        <td mat-cell *matCellDef="let row">{{ row[column] }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="objectKeys(columnHeader)"></tr>
+      <tr mat-row *matRowDef="let row; columns: objectKeys(columnHeader);"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [colSpan]="objectKeys(columnHeader).length">
+          No matching data
+        </td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
